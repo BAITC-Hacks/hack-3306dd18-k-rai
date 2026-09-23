@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 BASE = Path(__file__).resolve().parent
 load_dotenv(BASE / ".env", override=False, encoding="utf-8-sig")
 OUT = Path(os.getenv("GRAPH_OUT", str(BASE / "out")))
-FRONTEND_DIR = Path(os.getenv("FRONTEND_DIR", str(BASE / "frontend/dist")))
+FRONTEND_DIR = Path(os.getenv("FRONTEND_DIR", str(BASE / "frontend/out")))
 app = FastAPI(title="Money Graph API")
 app.add_middleware(CORSMiddleware,
     allow_origins=[x.strip() for x in os.getenv("CORS_ORIGINS", "http://localhost:4174,http://127.0.0.1:4174").split(",") if x.strip()],

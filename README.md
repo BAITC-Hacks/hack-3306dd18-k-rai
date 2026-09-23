@@ -2,9 +2,15 @@
 
 ```bash
 pip install -r requirements.txt
-python pipeline.py --data ./data --out ./out
-uvicorn api:app --host 0.0.0.0 --port 8000
+python start.py
 ```
+
+Нужны Python и Node.js с npm. Откройте **http://localhost:8000**.
+`start.py` установит отсутствующие npm-зависимости, соберёт Next.js с реальным API,
+пересчитает граф и запустит FastAPI. Фронтенд и API работают на одном адресе.
+Ключ `OPENAI_API_KEY` читается из корневого `.env`; во фронтенд он не передаётся.
+Для повторного запуска без изменения фронта: `python start.py --skip-build`.
+После изменения файлов фронта запускайте без `--skip-build`.
 
 `pipeline.py` читает `nodes.parquet`, `edges.parquet` и `transactions.parquet`, а затем создаёт `out/nodes_roles.csv`, `out/clusters.csv`, `out/top_nodes.csv` и `out/graph.json`. API: `GET /api/graph`, `GET /api/node/{gid}`, `POST /api/ask`, `POST /api/resilience`.
 
